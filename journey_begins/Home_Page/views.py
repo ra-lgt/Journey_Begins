@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import *
+from .bus_data import *
 from django.shortcuts import redirect
 from django.contrib import messages
 import pyrebase
-import pandas as pd
+
 # Create your views here.
-bus_list=pd.read_excel('bus_list.xlsx')
+
 firebaseConfig = {
         "apiKey": "AIzaSyAEzl4aWGVQnTb4Sk9pMNRhzNCxe3MFAmw",
 
@@ -29,9 +30,9 @@ firebase=pyrebase.initialize_app(firebaseConfig)
 authorize=firebase.auth()
 session=""
 email=""
-
+bus_list=Data_set.data
 def home(request):
-    print(bus_list.head())
+
     global session
     global email
     if (request.method == 'POST'):
@@ -77,11 +78,34 @@ def signout(request):
 """                                bus                                                     """
 
 def search_bus(request):
+    global bus_list
     if(request.method=="POST"):
         depature=request.POST.get('depature')
         arrive=request.POST.get('arrive')
         date=request.POST.get('date')
-        return HttpResponse(date)
+
+        try:
+            fee=[]
+            name=[]
+
+            if(bus_list[depature][arrive]):
+                temp=bus_list[depature][arrive]
+                for i in range(len(temp)):
+                    if(i%2==0):
+                        fee.append(temp[i])
+                    else:
+                        name.append(temp[i])
+                print(zip(fee,name))
+                return render(request,'searchbus.html',{
+                    'depature':depature,
+                    'arrive':arrive,
+                    'date':date,
+                    'datas':zip(fee,name),
+                    'name':name})
+        except:
+            #404 page
+            pass
+        return HttpResponse(0)
     else:
         return HttpResponse(1)
 

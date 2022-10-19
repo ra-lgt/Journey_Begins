@@ -9,33 +9,22 @@
 </head>
 
 <body>
-    
-    
+
     <div class="cardContainer">
         <div class="det">
-            <h1 id="fro">FROM</h1>
-            <h1 id="to">TO</h1>
-            <h1 id="date">DATE</h1>
+            <h1 id="fro">{{depature}}</h1>
+            <h1 id="to">{{arrive}}</h1>
+            <h1 id="date">{{date}}</h1>
         </div>
 
-      
-        <div class="card">
-            <h2>First card</h2>
-            <p>Some text</p>
-        </div>
-        <div class="card">
-            <h2>Second card</h2>
-            <p>Some text</p>
-        </div>
-        <div class="card">
-            <h2>Third card</h2>
-            <p>Some text</p>
-        </div>
-        <div class="card">
 
-      <h2>Fourth card</h2>
-            <p>Some text</p>
+        {% for f,n in datas %}
+        <div class="card">
+            <h2>{{f}}</h2>
+            <p>{{n}}</p>
         </div>
+
+        {%endfor%}
     </div>
 </body>
 <style>
