@@ -4,9 +4,10 @@ from .forms import *
 from django.shortcuts import redirect
 from django.contrib import messages
 import pyrebase
+import pandas as pd
 # Create your views here.
-class Sign_in_Sign_up:
-    firebaseConfig = {
+bus_list=pd.read_excel('bus_list.xlsx')
+firebaseConfig = {
         "apiKey": "AIzaSyAEzl4aWGVQnTb4Sk9pMNRhzNCxe3MFAmw",
 
         "authDomain": "sece-hackathon-390a0.firebaseapp.com",
@@ -24,41 +25,65 @@ class Sign_in_Sign_up:
         "measurementId": "G-Y5YXYRMD9M"
 
     }
-    firebase=pyrebase.initialize_app(firebaseConfig)
-    authorize=firebase.auth()
-    def home(request):
-        if (request.method == 'POST'):
-            form = Login(request.POST)
+firebase=pyrebase.initialize_app(firebaseConfig)
+authorize=firebase.auth()
+session=""
+email=""
 
-            if (form.is_valid()):
-                email = form.cleaned_data['email_id']
-                passwd = form.cleaned_data['passwd']
-                sign_in = Sign_in_Sign_up()
-                try:
-                    sign_in.authorize.sign_in_with_email_and_password(email, passwd)
-                    return render(request, 'home.html', {'option': email})
-                except Exception:
-                    return HttpResponse("Exception")
+def home(request):
+    print(bus_list.head())
+    global session
+    global email
+    if (request.method == 'POST'):
+        form = Login(request.POST)
 
+        if (form.is_valid()):
+            email = form.cleaned_data['email_id']
+            passwd = form.cleaned_data['passwd']
 
+            try:
+                user_auth=authorize.sign_in_with_email_and_password(email, passwd)
+                session=user_auth['idToken']
+                print(session)
+                return render(request, 'home.html', {'option': email,'session':session})
+            except Exception:
+                return HttpResponse("Exception")
+        else:
+            return HttpResponse("Login Failed")
+    else:
+        return render(request,'home.html',{'option': email,'session':session})
+
+def register(request):
+    if(request.method=='POST'):
+        form=Register(request.POST)
+        if(form.is_valid()):
+
+            email=form.cleaned_data['email_id']
+            passwd=form.cleaned_data['passwd']
+            re_passwd=form.cleaned_data['re_password']
+
+            if(passwd==re_passwd):
+                authorize.create_user_with_email_and_password(email,passwd)
+                return HttpResponse("<script>alert('Registered successfully')</script>")
             else:
-                return HttpResponse("Login Failed")
-        return render(request,'home.html')
+                return HttpResponse("<script>alert('password does not match')</script>")
+def signout(request):
+    global email
+    email=""
+    global session
+    session=""
+    return render(request,'home.html',{'option': email,'session':session})
 
-    def register(request):
-        if(request.method=='POST'):
-            form=Register(request.POST)
-            if(form.is_valid()):
-                sign_up=Sign_in_Sign_up()
-                email=form.cleaned_data['email_id']
-                passwd=form.cleaned_data['passwd']
-                re_passwd=form.cleaned_data['re_password']
+"""                                bus                                                     """
 
-                if(passwd==re_passwd):
-                    sign_up.authorize.create_user_with_email_and_password(email,passwd)
-                    return HttpResponse("<script>alert('Registered successfully')</script>")
-                else:
-                    return HttpResponse("<script>alert('password does not match')</script>")
+def search_bus(request):
+    if(request.method=="POST"):
+        depature=request.POST.get('depature')
+        arrive=request.POST.get('arrive')
+        date=request.POST.get('date')
+        return HttpResponse(date)
+    else:
+        return HttpResponse(1)
 
 
 

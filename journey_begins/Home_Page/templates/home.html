@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/stylehome.css' %}">
-    <script src="{% static 'js/login.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/pop.css' %}">
-    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static '/css/stylehome.css' %}">
+    <script src="{% static '/js/login.js' %}"></script>
+    <link rel="stylesheet" href="{% static '/css/pop.css' %}">
+    <link rel="stylesheet" href="{% static '/css/form.css' %}">
 
 
 </head>
@@ -51,16 +51,16 @@
 
             </li>
             <li class="navbar-dropdown">
-                {% if option%}
+                {% if session != "" %}
                 <a href="#" class="nav__link"  id="move">{{option}}</a>
                 {% else %}
 
                 <a href="#" class="nav__link"  id="move">Profile</a>
                 {% endif %}
                 <div class="dropdown">
-                    {% if option %}
+                    {% if session != "" %}
 
-                    <a href="" class="button big">signout</a>
+                    <a onclick="location.href='signout'" class="button big">signout</a>
 
                     {% else %}
                     <a href="#" id="contact" class="button big">signin/signup</a>
@@ -228,19 +228,20 @@
     
     <main>
         <section class="home">             
-                    <form>
+                    <form method="POST" action="search_bus">
+                        {% csrf_token %}
                         <div class="input grid">
                             <div class="box">
                               <label>Departcher</label>
-                              <input id="input2" type="text" placeholder="Check-in-Date">
+                              <input id="input2" type="text" name="depature" placeholder="Check-in-Date" required>
                             </div>
                             <div class="box">
                               <label>Arrive</label>
-                              <input id="input2" type="text" placeholder="Check-out-Date">
+                              <input id="input2" type="text" name="arrive" placeholder="Check-out-Date" required>
                             </div>
                             <div class="box">
                               <label>Date</label> <br>
-                              <input id="input2" type="date" placeholder="0">
+                              <input id="input2" type="date" name="date" placeholder="0" required>
                             </div>
                             <div class="Serach1">
                                 <button class="btn">Search</button>

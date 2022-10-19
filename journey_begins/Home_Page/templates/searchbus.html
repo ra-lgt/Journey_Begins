@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+</head>
+
+<body>
+    
+    
+    <div class="cardContainer">
+        <div class="det">
+            <h1 id="fro">FROM</h1>
+            <h1 id="to">TO</h1>
+            <h1 id="date">DATE</h1>
+        </div>
+
+      
+        <div class="card">
+            <h2>First card</h2>
+            <p>Some text</p>
+        </div>
+        <div class="card">
+            <h2>Second card</h2>
+            <p>Some text</p>
+        </div>
+        <div class="card">
+            <h2>Third card</h2>
+            <p>Some text</p>
+        </div>
+        <div class="card">
+
+      <h2>Fourth card</h2>
+            <p>Some text</p>
+        </div>
+    </div>
+</body>
+<style>
+    body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.card {
+    color: rgb(143, 32, 32);
+    border:1px solid black;
+    height: 200px;
+    width: 900px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin:50px 100px 0px 300px
+
+
+}
+.det{
+    display: flex;
+    margin-left: 20px;
+
+
+
+}
+#fro{
+    padding-right: 20px;
+}
+#to{
+    padding-right: 20px;
+}
+.card p {
+    font-size: 18px;
+}
+.cardContainer{
+    margin-top: 10px;
+
+}
+.cardContainer:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 600px) {
+    .card {
+        width: 100%;
+    }
+}
+</style>
+
+</html>
