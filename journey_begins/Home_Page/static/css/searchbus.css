@@ -1,0 +1,51 @@
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.card {
+    color: rgb(143, 32, 32);
+    border:1px solid black;
+    height: 200px;
+    width: 900px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin:50px 100px 0px 300px
+  
+    
+}
+.det{
+    display: flex;
+    margin-left: 20px;
+   
+
+
+}
+#fro{
+    padding-right: 20px;
+}
+#to{
+    padding-right: 20px;
+}
+.card p {
+    font-size: 18px;
+}
+.cardContainer{
+    margin-top: 10px;
+
+}
+.cardContainer:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 600px) {
+    .card {
+        width: 100%;
+    }
+}
