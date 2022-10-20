@@ -102,11 +102,9 @@ def search_bus(request):
                     'date':date,
                     'datas':zip(fee,name)})
         except:
-            #404 page
-            pass
-        return HttpResponse(0)
+            return render(request,'404.html')
     else:
-        return HttpResponse(1)
+        return render(request,'404.html')
 
 
 
