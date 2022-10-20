@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import *
-from .bus_data import *
+
 from django.shortcuts import redirect
 from django.contrib import messages
 import pyrebase
@@ -30,7 +30,7 @@ firebase=pyrebase.initialize_app(firebaseConfig)
 authorize=firebase.auth()
 session=""
 email=""
-bus_list=Data_set.data
+
 def home(request):
 
     global session
@@ -48,7 +48,7 @@ def home(request):
                 print(session)
                 return render(request, 'home.html', {'option': email,'session':session})
             except Exception:
-                return HttpResponse("Exception")
+                return HttpResponse("Try again turn on wifi")
         else:
             return HttpResponse("Login Failed")
     else:
@@ -77,34 +77,6 @@ def signout(request):
 
 """                                bus                                                     """
 
-def search_bus(request):
-    global bus_list
-    if(request.method=="POST"):
-        depature=request.POST.get('depature')
-        arrive=request.POST.get('arrive')
-        date=request.POST.get('date')
-
-        try:
-            fee=[]
-            name=[]
-
-            if(bus_list[depature][arrive]):
-                temp=bus_list[depature][arrive]
-                for i in range(len(temp)):
-                    if(i%2==0):
-                        fee.append(temp[i])
-                    else:
-                        name.append(temp[i])
-
-                return render(request,'searchbus.html',{
-                    'depature':depature,
-                    'arrive':arrive,
-                    'date':date,
-                    'datas':zip(fee,name)})
-        except:
-            return render(request,'404.html')
-    else:
-        return render(request,'404.html')
 
 
 
