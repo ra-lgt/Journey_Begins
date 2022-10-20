@@ -95,13 +95,12 @@ def search_bus(request):
                         fee.append(temp[i])
                     else:
                         name.append(temp[i])
-                print(zip(fee,name))
+
                 return render(request,'searchbus.html',{
                     'depature':depature,
                     'arrive':arrive,
                     'date':date,
-                    'datas':zip(fee,name),
-                    'name':name})
+                    'datas':zip(fee,name)})
         except:
             #404 page
             pass
