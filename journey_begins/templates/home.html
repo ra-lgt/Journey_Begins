@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static '/css/stylehome.css' %}">
+    <script src="{% static '/js/login.js' %}"></script>
+    <link rel="stylesheet" href="{% static '/css/pop.css' %}">
+    <link rel="stylesheet" href="{% static '/css/form.css' %}">
+    <link rel="stylesheet" href="{% static '/css/offer.css' %}">
+
+
+</head>
+
+<body>
+
+    <header class="header">
+        <div id="container1">
+            <span id="text1"></span>
+            <span id="text2"></span>
+        </div>
+
+        <svg id="filters">
+            <defs>
+                <filter id="threshold">
+                    <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
+                                            0 1 0 0 0
+                                            0 0 1 0 0
+                                            0 0 0 255 -140" />
+                </filter>
+            </defs>
+        </svg>
+        <Script>
+            const elts = {
+                text1: document.getElementById("text1"),
+                text2: document.getElementById("text2")
+            };
+
+            const texts = [
+                "YOURS",
+                "JOURNEY",
+                "BEGINS",
+                "HERE",
+                ":)"
+
+            ];
+
+            const morphTime = 1;
+            const cooldownTime = 0.25;
+
+            let textIndex = texts.length - 1;
+            let time = new Date();
+            let morph = 0;
+            let cooldown = cooldownTime;
+
+            elts.text1.textContent = texts[textIndex % texts.length];
+            elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+
+            function doMorph() {
+                morph -= cooldown;
+                cooldown = 0;
+
+                let fraction = morph / morphTime;
+
+                if (fraction > 1) {
+                    cooldown = cooldownTime;
+                    fraction = 1;
+                }
+
+                setMorph(fraction);
+            }
+
+            function setMorph(fraction) {
+                elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+                elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+                fraction = 1 - fraction;
+                elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+                elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+                elts.text1.textContent = texts[textIndex % texts.length];
+                elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+            }
+
+            function doCooldown() {
+                morph = 0;
+
+                elts.text2.style.filter = "";
+                elts.text2.style.opacity = "100%";
+
+                elts.text1.style.filter = "";
+                elts.text1.style.opacity = "0%";
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                let newTime = new Date();
+                let shouldIncrementIndex = cooldown > 0;
+                let dt = (newTime - time) / 1000;
+                time = newTime;
+
+                cooldown -= dt;
+
+                if (cooldown <= 0) {
+                    if (shouldIncrementIndex) {
+                        textIndex++;
+                    }
+
+                    doMorph();
+                } else {
+                    doCooldown();
+                }
+            }
+
+            animate();
+
+        </Script>
+
+
+    </header>
+
+    <nav class="sticky navbar">
+        <!-- <div class="brand ">
+            <img src="img4.png" height="100" width="160px" >
+
+        </div>-->
+        <div class="logo">
+            <h2>Journey <span>Begins</span></h2>
+
+        </div>
+
+
+        <!--  <label for="nav" class="nav__open"><i></i><i></i><i></i></label>-->
+        <div class="nav">
+            <ul class="nav__items">
+                <li class="navbar-dropdown">
+                <li class="nav__item"><a href="#" class="nav__link">Home</a></li>
+
+                </li>
+                <li class="navbar-dropdown">
+                    <a href="#" class="nav__link">Bookings</a>
+                    <div class="dropdown">
+                        <a href="#">Your Tickets</a><br>
+                        <a href="#">Cancel Reservation</a>
+
+                    </div>
+                </li>
+                <li class="navbar-dropdown">
+                <li class="nav__item"><a href="#" class="nav__link">Help</a></li>
+
+                </li>
+                <li class="navbar-dropdown">
+                    {% if session != "" %}
+                    <a href="#" class="nav__link" id="move">{{option}}</a>
+                    {% else %}
+
+                    <a href="#" class="nav__link" id="move">Profile</a>
+                    {% endif %}
+                    <div class="dropdown">
+                        {% if session != "" %}
+
+                        <a onclick="location.href='signout'" class="button big">signout</a>
+
+                        {% else %}
+                        <a href="#" id="contact" class="button big">signin/signup</a>
+                        {% endif %}
+                    </div>
+                </li>
+
+                <div class="cd-popup contact" role="alert">
+
+                    <div class="cd-popup-container" style="">
+                        <p style="">
+                            <a href="" class="cd-popup-close cd-close-button">
+                                <i class="fa fa-times" style="pointer-events:none;"></i>
+                            </a>
+                        </p>
+
+                        <div class="login-wrap">
+                            <div class="login-html">
+
+                                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1"
+                                    class="tab">Sign In</label>
+                                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2"
+                                    class="tab">Sign Up</label>
+                                <div class="login-form">
+
+                                    <div class="sign-in-htm">
+                                        <form method="post" action="">
+                                            {% csrf_token %}
+                                            <div id="top" class="group">
+
+                                                <label for="user" class="label">Email</label>
+                                                <input id="user" name="email_id" type="text" class="input">
+                                            </div>
+
+                                            <div class="group">
+
+                                                <label for="pass" class="label">Password</label>
+                                                <input id="pass" type="password" name="passwd" class="input"
+                                                    data-type="password">
+                                            </div>
+                                            <div class="group">
+                                                <input id="check" type="checkbox" class="check" checked><br>
+                                                <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                                            </div>
+                                            <div class="group">
+                                                <input type="submit" class="button" value="Sign In">
+                                            </div>
+
+                                            <div class="foot-lnk">
+                                                <a href="#forgot">Forgot Password?</a>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+
+
+                                    <form method="POST" action="register">
+                                        {% csrf_token %}
+                                        <div class="sign-up-htm">
+                                            <div class="group" id="down">
+                                                <label for="email" class="label">Email Address</label>
+                                                <input id="email" name="email_id" type="email" class="input">
+                                            </div>
+                                            <div class="group">
+                                                <label for="pass" class="label">Password</label>
+                                                <input id="pass" name="passwd" type="password" class="input"
+                                                    data-type="password">
+                                            </div>
+                                            <div id="rep" class="group">
+                                                <label for="re_pass" class="label">Repeat Password</label>
+                                                <input id="re_pass" name="re_password" type="password" class="input"
+                                                    data-type="password">
+                                            </div>
+
+                                            <div class="group">
+                                                <input type="submit" id="ryt" class="button" value="Sign Up">
+                                            </div>
+
+                                            <div class="foot-lnk">
+                                                <label for="tab-1">Already Signed in?</a>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <!--	<div class="section1">
+		<div class="container1">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+					<div class="section1 pb-5 pt-5 pt-sm-2 text-center">
+						<h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+			          	<input class="checkbox1" type="checkbox1" id="reg-log" name="reg-log"/>
+			          	<label for="reg-log"></label>
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+								<div class="card-front">
+									<div class="center-wrap">
+										<div class="section1 text-center">
+											<h4 class="mb-4 pb-3">Log In</h4>
+											<div class="form-group">
+												<input class="in" type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input class="in" type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<a id="link" href="#" class="btn mt-4">submit</a>
+                            				<p id="p" class="mb-0 mt-4 text-center"><a href="#0" class="link1">Forgot your password?</a></p>
+				      					</div>
+			      					</div>
+			      				</div>
+								<div class="card-back">
+									<div class="center-wrap">
+										<div class="section1 text-center">
+											<h4 class="mb-4 pb-3">Sign Up</h4>
+											<div class="form-group">
+												<input class="in"  type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
+												<i class="input-icon uil uil-user"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input class="in"  type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input class="in"  type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<a id="link" href="#" class="btn1 mt-4">submit</a>
+				      					</div>
+			      					</div>
+			      				</div>
+			      			</div>
+			      		</div>
+			      	</div>
+		      	</div>
+	      	</div>
+	    </div>
+	</div>-->
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+                    <script src="{% static 'js/pop.js' %}"></script>
+
+                    </li>
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="home">
+            <form method="POST" action="search_bus">
+                {% csrf_token %}
+                <div class="input grid">
+                    <div class="box">
+                        <label>Departure</label>
+                        <input id="input2" type="text" name="depature" placeholder="Check-in-Date" required>
+                    </div>
+                    <div class="box">
+                        <label>Arrival</label>
+                        <input id="input2" type="text" name="arrive" placeholder="Check-out-Date" required>
+                    </div>
+                    <div class="box">
+                        <label>Date</label> <br>
+                        <input id="input2" type="date" name="date" placeholder="0" required>
+                    </div>
+                    <div class="Serach1">
+                        <button class="btn">Search</button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </form>
+
+
+
+
+
+        </section>
+        <div class="movement">
+
+            <div class="card1">
+                <img src="" >
+                <h3></h3>
+                <p></p>
+            </div>
+    
+            <div class="card2">
+                <img src="" >
+                <h3></h3>
+                <p></p>
+            </div>
+    
+            <div class="card3">
+                <img src="">
+                
+                <h3></h3>
+                <p></p>
+            </div>
+    
+    
+        </div>
+        <div class="facility">
+    
+        </div>
+</body>
+
+</html>
