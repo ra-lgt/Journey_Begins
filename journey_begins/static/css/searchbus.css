@@ -66,29 +66,45 @@ body {
     margin-top: 0.9rem;
     background-color: white;
 
-
 }
 
 .name {
 
+    width:10%;
     flex-flow: column wrap;
     flex-direction: column;
     flex-wrap: wrap;
 
 }
 
-.time {
+.stime {
+    width: 10%;
     flex-flow: column wrap;
     flex-direction: column;
     flex-wrap: wrap;
+}
+
+.etime {width:10%;
+    flex-flow: column wrap;
+    flex-direction: column;
+    flex-wrap: wrap;
+
 }
 
 .seats {
+
+
     flex-flow: column wrap;
     flex-direction: column;
     flex-wrap: wrap;
 }
+.arr{
 
+    flex-flow: column wrap;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
 /*
 #name{
     padding-right: 350px;
@@ -212,19 +228,34 @@ body {
 }
 
 
+.ac {
 
+    margin-left: 30px;
+    margin-bottom: 10px;
+    box-sizing: 10px;
 
-.bustimes{
+}
+
+.acl {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.bustimes {
     border-bottom: 1px solid rgb(225, 231, 238);
     position: absolute;
     height: 550px;
     width: 100%;
 }
-.bstimes{
+
+.bstimes {
     display: flex;
     margin-bottom: 10px;
 }
-#bustit{
+
+#bustit {
 
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding: 309px 150px 10px 20px;
@@ -235,7 +266,7 @@ body {
 }
 
 
-#res2{
+#res2 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding: 313px 20px 10px 0px;
     font-size: 13px;
@@ -245,13 +276,14 @@ body {
 
 
 
-.apply{
+.apply {
     border-bottom: 1px solid rgb(225, 231, 238);
     position: absolute;
     height: 700px;
     width: 100%;
 }
-.app{
+
+.app {
     display: flex;
     cursor: pointer;
     -webkit-box-pack: center;
@@ -265,6 +297,7 @@ body {
     border: none;
     border-radius: 0.4rem;
 }
+
 .app:hover {
     background-color: #c41f1f;
     box-shadow: 0 0px 5px 0 #c41f1f inset, 0 0px 5px 0 #c41f1f,

@@ -5,7 +5,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-
+  
 
 </head>
 
@@ -20,7 +20,7 @@
         </div>
 
         <div class="num">
-            <h4>Showing Buses num</h4>
+            <h4>Showing num Buses</h4>
         </div>
         <div class="wholecard">
             <div class="filters">
@@ -45,14 +45,14 @@
 
                     </div>
                     <div class="busbut">
-                        <input class="ac" type="checkbox" id="ac" name="Ac" value="ac">
+                        <!--<input class="ac" type="checkbox" id="ac" name="Ac" value="ac">
                         <label for="ac" class="acl">Ac</label><br>
                         <input class="ac" id="nonac" type="checkbox" id="nonac" name="" value="ac">
                         <label for="nonac"class="acl">Non Ac</label><br>
                         <input class="ac" type="checkbox" id="sleeper" name="sleeper" value="ac">
                         <label for="sleeper" class="acl">Sleeper</label><br>
                         <input class="ac" type="checkbox" id="Seater" name="Seater" value="ac">
-                        <label for="Seater" class="acl">Seater</label><br>
+                        <label for="Seater" class="acl">Seater</label><br>-->
 
                     </div>
 
@@ -68,14 +68,14 @@
                     </div>
 
                     <div class="busbut">
-                        <input class="ac" type="checkbox" id="ac" name="" value="ac">
+                        <!--<input class="ac" type="checkbox" id="ac" name="" value="ac">
                         <label class="acl">12 midnight - 6am</label><br>
                         <input class="ac" type="checkbox" id="ac" name="" value="ac">
                         <label class="acl">6am - 12 noon</label><br>
                         <input class="ac" type="checkbox" id="ac" name="" value="ac">
                         <label class="acl">12 noon - 6pm</label><br>
                         <input class="ac" type="checkbox" id="ac" name="" value="ac">
-                        <label class="acl">6pm - 12 midnight</label><br>
+                        <label class="acl">6pm - 12 midnight</label><br>-->
 
                     </div>
 
@@ -117,30 +117,40 @@
 
             <div class="layout">
 
-                {% for f,n in datas %}
+                {% for name,fee,start_time,end_time,offers,mins in datas %}
 
 
 
                 <div class="card">
                     <div class="buscard">
                         <div class="name">
-                            <h4 id="name">{{f}}</h4>
+                            <h4 id="name">{{name}}</h4>
                             <p>Bus Type</p>
                         </div>
 
-                        <div class="time">
-                            <h4 id="time">Time</h4>
-                            <p>{{depature}}</p>
+                        <div class="stime">
+                            <h4 id="stime">{{start_time}}:{{mins}}</h4>
+                            <p>depature</p>
+                        </div>
+                        <div class="arr">
+                            <h4 id="arr">-></h4>
+
+                        </div>
+                        <div class="etime">
+                            <h4 id="etime">{{end_time}}:{{mins}}</h4>
+                            <p>arrival</p>
                         </div>
                         <div class="price">
-                            <h4 id="price">₹ {{n}}</h4>
+
+                            <h4 id="price">₹ {{offers}}</h4>
                             <strike>
-                                <p id="price">₹ {{n}}</p>
+                                <p id="price">₹ {{fee}}</p>
                             </strike>
+
                         </div>
 
                         <div class="seats">
-                            <h4 id="seats">Total Seats</h4>
+                            <h4 id="seats">Total Seats no</h4>
                             <button class="btn3">SELECT SEAT</button>
                         </div>
                     </div>
@@ -159,11 +169,10 @@
 
 
     </div>
-
+    </div>
 </body>
-
 <style>
-body {
+    body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -231,29 +240,45 @@ body {
     margin-top: 0.9rem;
     background-color: white;
 
-
 }
 
 .name {
 
+    width:10%;
     flex-flow: column wrap;
     flex-direction: column;
     flex-wrap: wrap;
 
 }
 
-.time {
+.stime {
+    width: 10%;
     flex-flow: column wrap;
     flex-direction: column;
     flex-wrap: wrap;
+}
+
+.etime {width:10%;
+    flex-flow: column wrap;
+    flex-direction: column;
+    flex-wrap: wrap;
+
 }
 
 .seats {
+
+
     flex-flow: column wrap;
     flex-direction: column;
     flex-wrap: wrap;
 }
+.arr{
 
+    flex-flow: column wrap;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
 /*
 #name{
     padding-right: 350px;
@@ -392,17 +417,19 @@ body {
     margin-bottom: 10px;
 }
 
-.bustimes{
+.bustimes {
     border-bottom: 1px solid rgb(225, 231, 238);
     position: absolute;
     height: 550px;
     width: 100%;
 }
-.bstimes{
+
+.bstimes {
     display: flex;
     margin-bottom: 10px;
 }
-#bustit{
+
+#bustit {
 
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding: 309px 150px 10px 20px;
@@ -413,7 +440,7 @@ body {
 }
 
 
-#res2{
+#res2 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding: 313px 20px 10px 0px;
     font-size: 13px;
@@ -423,13 +450,14 @@ body {
 
 
 
-.apply{
+.apply {
     border-bottom: 1px solid rgb(225, 231, 238);
     position: absolute;
     height: 700px;
     width: 100%;
 }
-.app{
+
+.app {
     display: flex;
     cursor: pointer;
     -webkit-box-pack: center;
@@ -443,6 +471,7 @@ body {
     border: none;
     border-radius: 0.4rem;
 }
+
 .app:hover {
     background-color: #c41f1f;
     box-shadow: 0 0px 5px 0 #c41f1f inset, 0 0px 5px 0 #c41f1f,
@@ -451,5 +480,4 @@ body {
 }
 
 </style>
-
 </html>
