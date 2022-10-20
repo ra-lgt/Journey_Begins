@@ -15,28 +15,20 @@ body {
 }
 
 .header,
-.home,
-.about,
-.portfolio,
-.contact {
+.home
+ {
 	height: 100vh;
 }
 
+
 .header,
-.home,
-.about,
-.portfolio,
-.contact,
-.footer {
+.home
+{
 	position: relative;
 }
 
 .header h1,
-.home h1,
-.about h1,
-.portfolio h1,
-.contact h1,
-.footer h1 {
+.home h1{
 	margin: 0;
 	position: absolute;
 	top: 50%;
@@ -46,18 +38,10 @@ body {
 
 
 
-.header h1,
-.footer h1 {
-	color: var(--shades);
-}
 
-.footer {
-	height: 50vh;
-	background-color: var(--primary);
-}
 
 .header {
-	background-color: var(--primary);
+	background-color:rgb(135, 166, 156);
 }
 
 .navbar {
@@ -102,7 +86,8 @@ body {
 
 
 }
-.brand img{
+.brand 
+{
 	margin-top: 30px;
 	margin-bottom: 20px;
 	
@@ -303,15 +288,18 @@ body {
   }
   
   .grid {
+	
+	margin-left: 40px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 30px;
+    grid-gap: 20px;
     border-radius: 10px;
   }
   
   .home {
+	border-radius:10px;
     
-    margin:300px 0px 0px 250px;
+    margin:300px 0px 100px 250px;
     height: 20vh;
     color: white;
     width: 1100px;
@@ -326,8 +314,9 @@ body {
   
  .home .box{
     background: #2c2a2a;
-    padding: 20px 20px 40px 20px;
+  
  }
+
   #input2{
     border-radius: 10px;
     width: 90%;
@@ -339,11 +328,16 @@ body {
     color: rgb(4, 4, 4);
   }
   
+
 .btn{
+	font-family: monospace;
 	border-radius: 10px;
-	margin-top: 65px;
-    width: 90%;
-    padding: 13px 50px 13px 50px;
+	margin-top: 55px;
+    width: 45%;
+	
+	margin-left: 30px;
+	
+    padding: 5px 20px 5px 20px;
     border: 2px solid rgba(255, 255, 255, 0.1);
     outline: none;
     background: #ffffff;
@@ -359,6 +353,7 @@ body {
   /* dropdown*/
   
 .nav__items li.navbar-dropdown {
+	border-radius: 10px;
 	position: relative;
   }
   
@@ -382,6 +377,7 @@ body {
 	border-bottom-left-radius: 3px;
 	border-bottom-right-radius: 3px;
 	z-index: 111;
+	border-radius: 10px;
 	transition: 0.4s all;
   }
   .nav__items li.navbar-dropdown .dropdown a {
@@ -390,6 +386,7 @@ body {
 	font-weight: 400;
 	padding-left: 30px;
 	color:rgb(37, 35, 35);
+	line-height: 2;
 	text-decoration: none;
   }
 
@@ -404,10 +401,51 @@ body {
 	height: 40px;
 
   }
+
   
  
-  
+  /*anime*/
 
+
+  @import url("https://fonts.googleapis.com/css?family=Raleway:900&display=swap");
+
+.header{
+	
+	color:#fff;
+	background-color: linear-gradient(to right, red , rgb(238, 238, 237));;
+
+}
+#container1{
+	
+    position: absolute;
+    margin: auto;
+    width: 100vw;
+    height: 80pt;
+    top: 0;
+    bottom: 0;
+
+    filter: url(#threshold) blur(0.6px);
+}
+
+#text1,
+#text2 {
+    position: absolute;
+    width: 100%;
+    display: inline-block;
+
+    font-family: "Raleway", sans-serif;
+    font-size: 80pt;
+
+    text-align: center;
+
+    user-select: none;
+}
+
+.facility{
+	top:50%;
+
+	height: 100vh;
+}
 
 
   
