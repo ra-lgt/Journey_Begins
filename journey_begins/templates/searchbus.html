@@ -117,7 +117,7 @@
 
             <div class="layout">
 
-                {% for name,fee,start_time,end_time,offers,mins in datas %}
+                {% for name,fee,start,end,offers in datas %}
 
 
 
@@ -129,7 +129,7 @@
                         </div>
 
                         <div class="stime">
-                            <h4 id="stime">{{start_time}}:{{mins}}</h4>
+                            <h4 id="stime">{{start}}:00</h4>
                             <p>depature</p>
                         </div>
                         <div class="arr">
@@ -137,7 +137,7 @@
 
                         </div>
                         <div class="etime">
-                            <h4 id="etime">{{end_time}}:{{mins}}</h4>
+                            <h4 id="etime">{{end}}:30</h4>
                             <p>arrival</p>
                         </div>
                         <div class="price">
