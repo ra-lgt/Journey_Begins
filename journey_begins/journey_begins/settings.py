@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Home_Page',
     'Bus',
+    'Payment',
 ]
 
 MIDDLEWARE = [
