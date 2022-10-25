@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Bus Search</title>
 </head>
 
 <body id="backgrd">
@@ -13,13 +14,31 @@
     <div class="cardContainer">
 
         <div class="det">
-            <h1 id="fro">{{depature}}</h1>
-            <h1 id="to">{{arrive}}</h1>
-            <h1 id="date">{{date}}</h1>
+            <h4 id="strt"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                </svg></h4>
+            <h4 id="fro"> {{depature}}</h4>
+
+            <h4 id="end">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-send-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+                </svg>
+            </h4>
+            <h4 id="to">{{arrive}}</h4>
+
+            <h4 id="dat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-calendar-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z" />
+                </svg></h4>
+            <h4 id="date">{{date}}</h4>
         </div>
 
         <div class="num">
-            <h4>Showing num Buses {{length}}</h4>
+            <h2>Showing num Buses change_length:{{length}}</h2>
         </div>
 
         <div class="wholecard">
@@ -46,7 +65,7 @@
                             Ac
                         </button>
 
-                        <button type="button" class="btline2 btn-light"  onclick="location.href='bus_filter_Nc'">
+                        <button type="button" class="btline2 btn-light" onclick="location.href='bus_filter_Nc'">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-brightness-alt-high" viewBox="0 0 16 16">
@@ -55,48 +74,7 @@
                             </svg><br>Non Ac
                         </button>
                         <style>
-                            .btline1 {
-                                padding: 10px 40px 10px 40px;
-                                margin-top: 5px;
-                                align-items: center;
-                                color: rgb(177, 121, 121);
-                                background-color: white;
-                                border: 1px solid rgb(243, 236, 236);
-                            }
 
-                            .btline1:hover {
-                                border: 1px solid rgb(189, 128, 128);
-                                background-color: rgb(197, 127, 127);
-                                color: white;
-                            }
-
-
-
-                            .btline2 {
-                                padding: 10px 30px 10px 30px;
-                                border: 1px solid rgb(243, 236, 236);
-                                margin-top: 5px;
-                                align-items: center;
-                                color: rgb(177, 121, 121);
-                                background-color: white;
-
-
-                            }
-
-                            .btline2:hover {
-                                border: 1px solid rgb(189, 128, 128);
-                                color: white;
-                                background-color: rgb(197, 127, 127);
-                            }
-
-                            .bustms {
-                                padding: 0px 20px 10px 40px;
-
-                                display: flex;
-                                position: absolute;
-                                margin-top: 120px;
-                               
-                            }
                         </style>
 
 
@@ -110,85 +88,7 @@
 
             </div>
 
-            <!--<div class="filters">
-                <div class="fil">
-                    <p id="fils">
-                        Filters
-                    </p>
-                    <p id="reset">
-                        Reset All
 
-                    </p>
-
-                </div>
-                <div class="bustype">
-                    <div class="tit">
-                        <p id="btyp">
-                            Bus Type
-                        </p>
-                        <p id="res1">
-                            Reset
-                        </p>
-
-                    </div>
-                    <div class="btb">
-
-                        <div class="btb1">
-                            <button class="btbline1">
-                                <i class="material-icons" style="font-size:20px;">ac_units</i>Ac
-                            </button>
-                            <button class="btbline2">
-                                <i class="material-icons" style="font-size:20px;">ac_units</i>Non Ac
-                            </button>
-                            <button class="btbline3">
-                                <i class="material-icons" style="font-size:20px">ac_units</i>Sleeper
-                            </button>
-                            <button class="btbline4">
-                                <i class="material-icons" style="font-size:20px">ac_units</i>Seater
-                            </button>
-
-                        </div>
-
-
-                    </div>
-
-
-                </div>
-                <div class="bustimes">
-                    <div class="bstimes">
-                        <p id="bustit">
-                            Timings
-                        </p>
-                        <p id="res2">
-                            Reset
-                        </p>
-                    </div>
-                    <div class="btf">
-                        <div class="bustms">
-                            <button class="btline1">
-                                <i class="material-icons" style="font-size:20px">ac_units</i>12 midnight - 6 AM
-
-                            </button>
-                            <button class="btline2">
-                                <i class="material-icons" style="font-size:20px">ac_units</i>6 AM - 12 noon
-                            </button>
-                            <button class="btline3">
-                                <i class="material-icons" style="font-size:20px">ac_units</i>12 noon - 6 PM
-                            </button>
-                            <button class="btline4">
-                                <i class="material-icons" style="font-size:20px">ac_units</i>6 PM - 12 midnight
-
-                            </button>
-                        </div>
-                    
-
-                    </div>
-                </div>
-
-
-
-
-            </div>-->
 
 
             <div class="layout">
@@ -208,7 +108,11 @@
                             <p>{{s_point}}</p>
                         </div>
                         <div class="arr">
-                            <h4 id="arr">-></h4>
+                            <h4 id="arr"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                                </svg></h4>
 
                         </div>
                         <div class="etime">
@@ -225,9 +129,15 @@
                         </div>
 
                         <div class="seats">
-                            <h4 id="seats">Total Seats no {{seats}}</h4>
-                            <button class="btn3">SELECT SEAT</button>
+                            <h4 id="seats">Total Seats no seats {{seats}}</h4>
+                            <a id="selectseat" href="bookseats/{{name}}"> <button class="btn3">SELECT SEAT</button></a>
+
                         </div>
+
+                        <!--popup book seats-->
+
+
+
                     </div>
 
                 </div>
@@ -258,21 +168,45 @@
     }
 
     #backgrd {
-        background-color: rgb(192, 225, 237);
+        background-color: rgb(255, 255, 255);
     }
 
     .det {
+        font-size: 20px;
         display: flex;
         margin-left: 100px;
+        margin-top: 50px;
         margin-bottom: 50px;
     }
 
     #fro {
-        padding-right: 20px;
+        color: rgb(255, 200, 0);
+        padding-right: 40px;
+    }
+
+    #date {
+        color: rgb(255, 200, 0);
+    }
+
+    #strt {
+        color: rgb(0, 0, 0);
+        padding-right: 10px;
+    }
+
+    #end {
+        color: rgb(0, 0, 0);
+        padding-right: 10px;
+    }
+
+    #dat {
+        color: rgb(0, 0, 0);
+
+        padding-right: 10px;
     }
 
     #to {
-        padding-right: 20px;
+        color: rgb(255, 200, 0);
+        padding-right: 40px;
     }
 
     .card p {
@@ -302,24 +236,32 @@
         display: flex;
         flex-flow: column wrap;
         width: 100%;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.5);
+
+        margin-top: 0.9rem;
+        border-radius: 5px;
+        background-image: linear-gradient(to left, rgba(255, 0, 0, 0), rgb(255, 217, 79));
+
     }
 
     .buscard {
         display: flex;
         flex-wrap: wrap;
         color: rgb(6, 6, 6);
-        border: 1px solid rgb(255, 255, 255);
+
         height: 140px;
-        justify-content: space-around;
-        padding: 0px 30px 130px 60px;
         border-radius: 5px;
-        margin-top: 0.9rem;
-        background-color: white;
+        justify-content: space-around;
+        padding: 20px 60px 130px 60px;
+
+
+
+
 
     }
 
     .name {
-
+        margin-bottom: 20px;
         width: 10%;
         flex-flow: column wrap;
         flex-direction: column;
@@ -376,6 +318,12 @@
 
 }
 */
+    #selectseat {
+        text-decoration: none;
+
+
+    }
+
     .seats button.btn3 {
         display: flex;
         cursor: pointer;
@@ -383,19 +331,19 @@
         margin-top: 20px;
         justify-content: center;
         min-width: 128px;
-        background-color: rgb(205, 118, 118);
-        color: rgb(255, 255, 255);
-        padding: 0.5rem 1.5rem;
-        border: none;
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(0, 0, 0);
+        color: rgb(0, 0, 0);
+        padding: 10px 20px;
+
         border-radius: 0.4rem;
 
     }
 
     .seats button.btn3:hover {
-        background-color: #c41f1f;
-        box-shadow: 0 0px 5px 0 #c41f1f inset, 0 0px 5px 0 #c41f1f,
-            0 5px 5px 0 #c41f1f inset, 0 5px 5px 0 #c41f1f;
-        text-shadow: 0 0 5px #c41f1f, 0 0 5px #c41f1f;
+        background-color: rgb(250, 214, 86);
+        border: 1px solid rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
     }
 
     .cardContainer:after {
@@ -412,6 +360,7 @@
 
     /*filter*/
     .filters {
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.5);
 
         display: flex;
         width: 300px;
@@ -419,15 +368,16 @@
         margin-left: 70px;
         border-radius: 5px;
         position: absolute;
+
         height: 200px;
-        background-color: white;
+        background-image: linear-gradient(to left, rgba(255, 0, 0, 0), rgb(245, 200, 37));
     }
 
     .fil {
         display: flex;
         height: 90px;
-        width:100%;
-        border-bottom: 1px solid rgb(217, 229, 236);
+        width: 100%;
+        border-bottom: 1px solid rgb(0, 0, 0);
 
     }
 
@@ -445,7 +395,54 @@
         color: grey;
     }
 
+    .btline1 {
+        padding: 10px 40px 10px 40px;
+        margin-top: 5px;
+        align-items: center;
+        margin-left: 8px;
+        color: rgb(0, 0, 0);
+        background-color: white;
 
+        border: 1px solid black;
+    }
+
+    .btline1:hover {
+        border: 1px solid white;
+
+
+        background-color: rgb(250, 214, 86);
+        color: white;
+    }
+
+
+
+    .btline2 {
+        padding: 10px 30px 10px 30px;
+        border: 1px solid black;
+        margin-right: 0px;
+        margin-top: 5px;
+        align-items: center;
+        color: rgb(0, 0, 0);
+        background-color: white;
+
+
+    }
+
+    .btline2:hover {
+
+        border: 1px solid white;
+        color: white;
+        background-color: rgb(250, 214, 86);
+    }
+
+    .bustms {
+        padding: 0px 20px 10px 40px;
+
+        display: flex;
+        position: absolute;
+        margin-top: 120px;
+
+    }
 
 
 
@@ -505,4 +502,5 @@
     }
 */
 </style>
+
 </html>

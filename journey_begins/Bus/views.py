@@ -3,13 +3,25 @@ from .bus_data import Data_set
 import time
 from datetime import date as dates
 import random
+from journey_begins import settings
+from instamojo_wrapper import Instamojo
+
 from django.http import HttpResponse
+
 # Create your views here.
 
+
+API_KEY="test_e4152152589c3c8954a56998ef1"
+AUTH_TOKEN="test_16d4fce2079a45ec988e3655747"
+
+insta_mojo=Instamojo(api_key=API_KEY,auth_token=AUTH_TOKEN,endpoint='https://test.instamojo.com/api/1.1/')
 
 
 bus_list=Data_set().data
 curr_time=time.gmtime()
+#firestore
+
+ticket_key=['a','b','c','d','e','f','g','A','B','H','J','I','i','k','r','t','u','q','w']
 
 #bus_data
 name=[]
@@ -25,6 +37,12 @@ seats=[]
 depature=""
 arrive=""
 date=""
+pass_booked_bus_name=""
+pass_booked_fees=0
+amount=0
+index=0
+ticket=""
+number=0
 def search_bus(request):
 
     global name
@@ -64,7 +82,7 @@ def search_bus(request):
             if(bus_list[depature][arrive]):
 
                 bus=(bus_list[depature][arrive])
-                
+
                 name = (bus_list[depature][arrive]['name'])
                 fare = (bus_list[depature][arrive]['fare'])
                 s_point = (bus_list[depature][arrive]['s_point'])
@@ -118,7 +136,7 @@ def bus_filter_Ac(request):
     global depature
     global arrive
     global date
-    
+
     Ac_name=[]
     Ac_fare=[]
     Ac_s_point=[]
@@ -129,7 +147,7 @@ def bus_filter_Ac(request):
     Ac_offers=[]
     Ac_seats=[]
     count=0
-    
+
     for i in bus['bus_type']:
         if(i=='Ac'):
             Ac_name.append(bus['name'][count])
@@ -204,11 +222,76 @@ def bus_filter_Nc(request):
      'datas':zip(Ac_name,Ac_fare,Ac_s_point,Ac_e_point,Ac_start,Ac_end,Ac_bus_type,Ac_offers,Ac_seats)
      })
 
+def bookseats(request,starting=""):
+    global name, pass_booked_bus_name, pass_booked_fees, offers,amount,ticket_key,index,depature,arrive,date,ticket,number
+
+    if(starting=="passenger"):
+        number=request.POST.get('count')
+        amount=int(number)*pass_booked_fees
+        return render(request,'passenger.html',{'price':amount})
+    elif(starting=='payment'):
+        if(request.method=='POST'):
+            pass_name=request.POST.get('name')
+            pass_mail=request.POST.get('mail')
+            pass_phone=request.POST.get('phone')
+            membership_option=request.POST.get('membership_option')
+            for i in range(4):
+                ticket += random.choice(ticket_key) * 3
+                ticket += random.choice(ticket_key) * 2
+            if(membership_option=='no'):
+
+                response=insta_mojo.payment_request_create(
+                    purpose='Ticket',
+                    amount=amount,
+                    buyer_name='journey_begins_admin',
+                    email='raviajay9344@gmail.com',
+                    redirect_url='http://127.0.0.1:8000/'
+                )
 
 
+                #print(ticket)
+                data={
+                    'name':pass_name,
+                    'email':pass_mail,
+                    'phone':pass_phone,
+                    'ticket_id':ticket,
+                    'ticket_count':number,
+                    'from':depature,
+                    'to':arrive,
+                    'date':date
+                }
+                settings.fire.collection('Tickets').add(data)
+                return render(request, 'passenger.html',
+                              context={'url': response['payment_request']['longurl'], 'price': amount})
+            elif(membership_option=="yes"):
+                membership_firestore=settings.fire.collection('membership').get()
+                for i in membership_firestore:
+                    dicts=i.to_dict()
+                    try:
+                        if(dicts['mobile']==pass_phone):
+                            data = {
+                                'name': pass_name,
+                                'email': pass_mail,
+                                'phone': pass_phone,
+                                'ticket_id': ticket,
+                                'ticket_count': number,
+                                'from': depature,
+                                'to': arrive,
+                                'date': date
+                            }
+                            settings.fire.collection('Tickets').add(data)
+                            print("hi")
 
+                    except:
+                        pass
+                    #print(dicts)
+            return HttpResponse("done")
+        return HttpResponse("hii")
 
-
+    index=((name.index(starting)))
+    pass_booked_bus_name=name[index]
+    pass_booked_fees=offers[index]
+    return render(request,'bookseats.html',{'price':pass_booked_fees,'name':pass_booked_bus_name})
 
 
 

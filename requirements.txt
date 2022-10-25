@@ -1,0 +1,6 @@
+firebase-admin
+django
+smtplib
+pyrebase4
+email-to
+instamojo_wrapper

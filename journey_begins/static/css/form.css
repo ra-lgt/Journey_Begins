@@ -103,12 +103,12 @@ h6 span{
 .card-3d-wrapper {
   width: 100%;
   height: 100%;
-  position:absolute;    
+  position:absolute;
   top: 0;
-  left: 0;  
+  left: 0;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  transition: all 600ms ease-out; 
+  transition: all 600ms ease-out;
 }
 .card-front, .card-back {
   width: 100%;
@@ -147,7 +147,7 @@ h6 span{
 }
 
 
-.form-group{ 
+.form-group{
   position: relative;
   display: block;
     margin: 0;
@@ -235,7 +235,7 @@ h6 span{
     transition: all 200ms linear;
 }
 
-.btn1{  
+.btn1{
   border-radius: 4px;
   height: 44px;
   font-size: 13px;
@@ -264,12 +264,12 @@ h6 span{
   box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
 }
 .btn1:active,
-.btn1:focus{  
+.btn1:focus{
   background-color: #102770;
   color: #ffeba7;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
-.btn1:hover{  
+.btn1:hover{
   background-color: #102770;
   color: #ffeba7;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
@@ -290,7 +290,7 @@ a{color:inherit;text-decoration:none}
 	margin:auto;
 	max-width:525px;
 	min-height:600px;
-	position:relative;	
+	position:relative;
 }
 .login-html{
 	width:100%;
@@ -330,7 +330,7 @@ a{color:inherit;text-decoration:none}
 
 }
 .login-html .tab{
- 
+
 	font-size:22px;
 	margin-right:15px;
 	padding-bottom:5px;
@@ -343,7 +343,7 @@ a{color:inherit;text-decoration:none}
 	color:#fff;
 	border-color:#1b1b1b;
 }
-.login-form{   
+.login-form{
 	min-height:345px;
 	position:relative;
 	perspective:1000px;
